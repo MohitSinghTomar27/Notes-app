@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import swal from 'sweetalert';
 
 class NoteForm extends React.Component {
     constructor(props){
@@ -9,22 +10,46 @@ class NoteForm extends React.Component {
             title: this.props.title || '',
             body: this.props.body || '',
             category: this.props.category ? this.props.category._id : '',
-            categories: props.categories || []
+            categories: props.categories || [],
+            titleError:"",
+            bodyError:"",
+            categoryError:""
         }
+    }
+    validate = ()=>{
+        let titleError=""
+        let bodyError=""
+        let categoryError = ""       
+        if(!this.state.title){
+            titleError= 'Title Field is Required'
+        }
+        if(!this.state.body){
+            bodyError="Body Field is Required !!"
+            
+        }
+        if(!this.state.category){
+            categoryError="Category must be provided !!"
+        }
+        if(titleError || bodyError ||categoryError){
+            this.setState({titleError,bodyError,categoryError})
+            return false
+        }
+        return true
     }
     handleSubmit = (e) => {
         e.preventDefault()
-        const formData = {
-            title: this.state.title,
-            body: this.state.body,
-            category: this.state.category
-        }
-        this.props.note && (formData.id = this.props.note._id)
-        if(this.state.name){
+        const isValid = this.validate()
+
+        if(isValid){
+            const formData = {
+                title: this.state.title,
+                body: this.state.body,
+                category: this.state.category
+            }
+            this.props.note && (formData.id = this.props.note._id)
             this.props.handleSubmit(formData)
-        } else {
-            this.setState({ nameError : '* Field is required'})
         }
+        
     }
     handleChange = (e) => {
         this.setState({
@@ -39,13 +64,13 @@ class NoteForm extends React.Component {
                 <FormGroup>
                         <Label for="title">Title</Label>
                         <Input type="text" name="title" id="title" value={this.state.title} onChange={this.handleChange}/>
-                        { this.state.nameError ? <p style={{ color: 'red' }} >{ this.state.nameError }</p> : '' }
+                        <div style = {{color:'red'}}>{this.state.titleError} </div>
                 </FormGroup> 
 
                  <FormGroup>
                         <Label for="body">Description</Label>
                         <Input type="textarea" name="body" id="body" value={this.state.body} onChange={this.handleChange}/>
-                        { this.state.nameError ? <p style={{color: 'red'}}>{ this.state.nameError }</p> : '' }
+                        <div style = {{color:'red'}}>{this.state.bodyError} </div>
                 </FormGroup>
 
                 <FormGroup>
@@ -56,7 +81,7 @@ class NoteForm extends React.Component {
                              return < option key={category._id} value={category._id}>{category.name}</option>
                         })}
                         </Input>
-                        { this.state.nameError ? <p style={{color: 'red'}}>{ this.state.nameError }</p> : '' }
+                        <div style = {{color:'red'}}>{this.state.categoryError} </div>
                 </FormGroup>
                     <Button type="submit" value="submit">Submit</Button>
                    

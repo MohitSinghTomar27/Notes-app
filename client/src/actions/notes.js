@@ -24,7 +24,6 @@ export const startSetNotes = () => {
                    swal(response.data.message)
                 } else {
                     dispatch(setNotes(response.data))
-                    window.reload()
                 }
             })
             .catch((err) => {
@@ -56,7 +55,7 @@ export const startAddNote = (formData, props) => {
                    swal('successfully created')
                     dispatch(addNOte(response.data))
                     props.history.push('/notes')
-                    window.reload()
+                    window.location.reload()
                 }
             })
             .catch((err) => {

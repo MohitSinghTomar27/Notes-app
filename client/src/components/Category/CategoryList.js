@@ -13,7 +13,8 @@ class CategoryList extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            categories: []
+            categories: [],
+           
         }
     }
 
@@ -64,36 +65,7 @@ class CategoryList extends React.Component {
             
         </div>
 
-        // <React.Fragment>
-        //     <h2>Categories - {props.categories.length}</h2>
-        //     <table border="1">
-        //         <thead>
-        //             <tr>
-        //                 <th>#</th>
-        //                 <th>Name</th>
-        //                 <th colSpan="2">Actions</th>
-        //             </tr>
-        //         </thead>
-        //         <tbody>
-        //             {
-        //                 props.categories.map((category, index) => {
-        //                     return (
-        //                         <tr key={index}>
-        //                             <td>{index+1}</td>
-        //                             <td>{category.name}</td>
-        //                             <td><Link to={`/categories/${category._id}`}>Edit</Link></td>
-        //                             <td><button onClick={ () => {
-        //                                 handleDelete(category._id)
-        //                             }}>Delete</button></td>
-        //                         </tr>
-        //                     )
-        //                 })
-        //             }
-        //         </tbody>
-        //     </table>
-        //     <br/>
-        //     <Link to="/categories/new">Add category</Link>
-        // </React.Fragment>
+   
         )
     }
 
