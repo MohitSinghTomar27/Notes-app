@@ -18,7 +18,7 @@ import { Button, Form, FormGroup, Label } from 'reactstrap'
         if(this.state.name){
             this.props.handleSubmit(formData)
         }
-        this.setState({name:''})
+        this.setState({nameError:'Field is Required !!'})
     }
     handleChange = (e) => {
         this.setState({

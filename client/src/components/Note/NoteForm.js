@@ -21,10 +21,10 @@ class NoteForm extends React.Component {
         let bodyError=""
         let categoryError = ""       
         if(!this.state.title){
-            titleError= 'Title Field is Required'
+            titleError= 'Title Field is Required !!'
         }
         if(!this.state.body){
-            bodyError="Body Field is Required !!"
+            bodyError="Description Field is Required !!"
             
         }
         if(!this.state.category){
